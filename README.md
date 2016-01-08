@@ -2,7 +2,7 @@ Warning: This package is still very early in development. Feedback, issues and P
 
 # JuliaJS.jl
 
-This is simple package that allows Julia to interact with JavaScript in a browser.
+This is simple package that allows Julia to interact with JavaScript in a browser and is heavily inspired by [Blink.jl](https://github.com/JunoLab/Blink.jl).
 
 ## Installation
 
