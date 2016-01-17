@@ -1,6 +1,6 @@
 "use strict";
 
-var JuliaJS = (function () {
+var Julia = (function () {
 
     var sock = new WebSocket('ws://'+window.location.host);
     sock.onmessage = function( message ){

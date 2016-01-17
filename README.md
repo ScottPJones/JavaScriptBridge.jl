@@ -1,16 +1,16 @@
 Warning: This package is still very early in development. Feedback, issues and PRs are most welcome.
 
-# JuliaJS.jl
+# JavaScriptBridge.jl
 
 This is simple package that allows Julia to interact with JavaScript in a browser and is heavily inspired by [Blink.jl](https://github.com/JunoLab/Blink.jl).
 
 ## Installation
 
-JuliaJS is not registered and it requires another unregistered package: [StringInterpolation](https://github.com/EricForgy/StringInterpolation.jl.git). To install, you'll need to run the following commands:
+JavaScriptBridge is not registered and it requires another unregistered package: [StringInterpolation](https://github.com/EricForgy/StringInterpolation.jl.git). To install, you'll need to run the following commands:
 
 ~~~julia
 julia> Pkg.clone("https://github.com/EricForgy/StringInterpolation.jl.git")
-julia> Pkg.clone("https://github.com/EricForgy/JuliaJS.jl.git")
+julia> Pkg.clone("https://github.com/EricForgy/JavaScriptBridge.jl.git")
 ~~~
 
 ## Usage Example:
@@ -18,16 +18,16 @@ julia> Pkg.clone("https://github.com/EricForgy/JuliaJS.jl.git")
 After installation, running the following from the Julia REPL
 
 ~~~julia
-julia> using JuliaJS
+julia> using JavaScriptBridge
 Listening on 0.0.0.0:8000...
 ~~~
 
-will start an HttpServer. Open your browser to [http://localhost:8000/julia](http://localhost:8000/julia) and you should see a blank page with "JuliaJS" in the browser tab.
+will start an HttpServer. Open your browser to [http://localhost:8000/julia](http://localhost:8000/julia) and you should see a blank page with "JavaScriptBridge" in the browser tab.
 
 With the browser open, run the following:
 
 ~~~julia
-julia> include(Pkg.dir("JuliaJS","examples","plotly.jl"))
+julia> include(Pkg.dir("JavaScriptBridge","examples","plotly.jl"))
 ~~~
 
 If the stars are aligned, you should see several sample charts appear in the browser window.
@@ -56,13 +56,13 @@ console.log("$(msg)")
 
 ### WebSockets
 
-JuliaJS creates an active link between Julia and your browser via WebSockets so you can update your charts from Julia without reloading the page. To see this, try rerunning the above example several times:
+JavaScriptBridge creates an active link between Julia and your browser via WebSockets so you can update your charts from Julia without reloading the page. To see this, try rerunning the above example several times:
 
 ~~~julia
-julia> include(Pkg.dir("JuliaJS","examples","plotly.jl"))
-julia> include(Pkg.dir("JuliaJS","examples","plotly.jl"))
-julia> include(Pkg.dir("JuliaJS","examples","plotly.jl"))
-julia> include(Pkg.dir("JuliaJS","examples","plotly.jl"))
+julia> include(Pkg.dir("JavaScriptBridge","examples","plotly.jl"))
+julia> include(Pkg.dir("JavaScriptBridge","examples","plotly.jl"))
+julia> include(Pkg.dir("JavaScriptBridge","examples","plotly.jl"))
+julia> include(Pkg.dir("JavaScriptBridge","examples","plotly.jl"))
 ~~~
 
 Each time you run from the REPL, the charts are updated without having to reload.

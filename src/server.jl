@@ -42,11 +42,11 @@ end
 
 http = HttpHandler() do req::Request, res::Response
     if ismatch(r"^/plot.ly", req.resource)
-        res = Response(open(readall,Pkg.dir("JuliaJS","res","plotly.html")))
+        res = Response(open(readall,Pkg.dir("JavaScriptBridge","res","plotly.html")))
     elseif ismatch(r"^/julia", req.resource)
-        res = Response(open(readall,Pkg.dir("JuliaJS","res","JuliaJS.html")))
-    elseif ismatch(r"^/JuliaJS.js", req.resource)
-        res = Response(open(readall,Pkg.dir("JuliaJS","res","JuliaJS.js")))
+        res = Response(open(readall,Pkg.dir("JavaScriptBridge","res","bridge.html")))
+    elseif ismatch(r"^/bridge.js", req.resource)
+        res = Response(open(readall,Pkg.dir("JavaScriptBridge","res","bridge.js")))
     end
     res
 end

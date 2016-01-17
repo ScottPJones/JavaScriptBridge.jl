@@ -1,9 +1,9 @@
-using JuliaJS
+using JavaScriptBridge
 
 # Open browser/refresh http://localhost:8000/julia
 
-JuliaJS.add("d3")
-JuliaJS.add("plotly")
+JS.add("d3")
+JS.add("plotly")
 
 function add_div(id)
     js"""

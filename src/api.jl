@@ -5,7 +5,7 @@ function addlibrary(url)
     js"""
     var script = document.createElement("script");
     script.src = "$(url)";
-    script.onload = JuliaJS.message("notify","$(name)");
+    script.onload = Julia.message("notify","$(name)");
     document.head.appendChild(script);
     """
     wait(condition[name])
@@ -26,7 +26,7 @@ function iframe(id,url)
     name = basename(url)
     condition[name] = Condition()
     js"""
-    d3.select("body").append("iframe").attr("id","$(id)").attr("src","$(url)").on("load", function() {JuliaJS.message("notify","$(name)");});
+    d3.select("body").append("iframe").attr("id","$(id)").attr("src","$(url)").on("load", function() {Julia.message("notify","$(name)");});
     """
     wait(condition[name])
     delete!(condition,name)
