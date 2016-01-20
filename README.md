@@ -30,9 +30,68 @@ With the browser open, run the following:
 julia> include(Pkg.dir("JavaScriptBridge","examples","plotly.jl"))
 ~~~
 
-If the stars are aligned, you should see several sample charts appear in the browser window.
+If the stars are aligned, you should see several sample charts appear in the browser window. If not, you can try running the above command again. If that still doesn't work, please let me know and I'll try to help.
 
 ## Notes:
+
+### Callbacks
+
+Julia code can be called from JavaScript using `callback`s stored in a `Dict`. For example, in Julia, you can define:
+
+~~~julia
+callback["sayhello"] = () -> println("Hello")
+~~~
+
+and call this from JavaScript (console or scripts) via:
+
+~~~js
+Julia.message("sayhello")
+~~~
+
+You can also define callbacks with arguments, e.g. in Julia, define:
+
+~~~julia
+callback["say"] = args -> println(args)
+~~~
+
+and call this from JavaScript via:
+
+~~~js
+Julia.message("say","Hello")
+~~~
+
+Multiple arguments are also supported, e.g. in Julia, define:
+
+~~~julia
+callback["rand"] = args -> println(rand(args...))
+~~~
+
+and call this from JavaScript via:
+
+~~~js
+Julia.message("rand",[2,3,4])
+~~~
+
+### Events & Conditions
+
+An important callback is `notify`. This callback allows Julia to listen for JavaScript events via `Condition`s. An example is provided in `api.jl`:
+
+~~~julia
+function addlibrary(url)
+    name = basename(url)
+    condition[name] = Condition()
+    js"""
+    var script = document.createElement("script");
+    script.src = "$(url)";
+    script.onload = Julia.message("notify","$(name)");
+    document.head.appendChild(script);
+    """
+    wait(condition[name])
+    delete!(condition,name)
+end
+~~~
+
+JavaScriptBridge keeps a dictionary of `Condition`s. The method, `addlibrary`, takes a url and adds a `Condition` indexed by the basename of the url to the dictionary. The JS library is added to the page in the browser and, when loading is completed, sends a message back to Julia using the `notify` callback. Julia will wait for this notification and finally delete it from the dictionary. This provides a simple blocking mechanism so that subsequent Julia code will not execute until the library is ready for use.
 
 ### Interpolation
 
